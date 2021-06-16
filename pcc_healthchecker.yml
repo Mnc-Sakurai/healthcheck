@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pccchecker
+  labels:
+    app: pccchecker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pccchecker
+  template:
+    metadata:
+      labels:
+        app: pccchecker
+    spec:
+      containers:
+      - name: pccchecker
+        image: minepicco/pcc-healthchecker:latest
+        env:
+          - name: CHANNEL
+            value: "YOUR-SLACK-CHANNEL"
+          - name: ICON
+            value: "(OPTIONAL)YOUR-FAVORITE-ICON"
+          - name: NAME
+            value: "(OPTIONAL)NAME-OF-SLACK-MESSAGE-SENDER"
+          - name: PCC_URL
+            value: "YOUR-PRISMA-CLOUD-COMPUTE-API-URL"
+          - name: WH_URL
+            value: "YOUR-SLACK-WEBHOOK-URL"
+          - name: ITV
+            value: "(OPTIONAL)HEALTH-CHECK-INTERVAL"
+          - name: BOT
+            value: "YOUR-SLACK-FILE-UPLOAD-TOKEN"
